@@ -64,8 +64,8 @@ fun ins' :: "'a::linorder \<Rightarrow> 'a llrb \<Rightarrow> 'a llrb" where
               GT \<Rightarrow> pre_invr l a r (ins' x r) |
               EQ \<Rightarrow> B l a r)" |
    "ins' x (R l a r) = (case cmp x a of 
-              LT \<Rightarrow> R (ins x l) a r |
-              GT \<Rightarrow> R l a (ins x r) |
+              LT \<Rightarrow> R (ins' x l) a r |
+              GT \<Rightarrow> R l a (ins' x r) |
               EQ \<Rightarrow> R l a r)"
 end
 
