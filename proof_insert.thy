@@ -219,11 +219,11 @@ lemma invc_baliR2: "\<lbrakk>invc l; invc_red r\<rbrakk> \<Longrightarrow> invc 
   apply auto
   by (auto simp: invc_rightredB color_rightredB)
 
-lemma invc_baliR3: "\<lbrakk>invc_red l; invc r\<rbrakk> \<Longrightarrow> invc_red (baliL l a r)"
+lemma invc_baliL1: "\<lbrakk>invc_red l; invc r\<rbrakk> \<Longrightarrow> invc_red (baliL l a r)"
   apply (induct l a r rule: baliL.induct)
   by(auto simp:  invc_redI invc_rightredB)
 
-lemma invc_baliR4: "\<lbrakk>invc_red l; invc r\<rbrakk> \<Longrightarrow> invc (baliL l a r)"
+lemma invc_baliL2: "\<lbrakk>invc_red l; invc r\<rbrakk> \<Longrightarrow> invc (baliL l a r)"
   apply (induct l a r rule: baliL.induct)
   by(auto simp:  invc_rightredB color_rightredB)
 
@@ -236,7 +236,7 @@ lemma invc3I: "invc t \<Longrightarrow> invc3 t"
 
 lemma invc_ins: "invc t \<longrightarrow> invc_red (ins x t) \<and> (color t = Black \<longrightarrow> invc (ins x t))"
   apply(induct x t rule: ins.induct)
-  by(auto simp: invc_baliR1 invc_baliR2 invc3I invc_baliR3 invc_baliR4 invc_rightredB)
+  by(auto simp: invc_baliR1 invc_baliR2 invc3I invc_baliL1 invc_baliL2 invc_rightredB)
 
 lemma invc2_ins:"invc t \<and> invh t \<and> color t = Black \<Longrightarrow> invc2 (ins x t)"
   by (simp add: invc2I invc_ins)
