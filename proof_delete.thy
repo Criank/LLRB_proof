@@ -71,19 +71,19 @@ end
 
 locale llrb_delete 
 begin
-definition pre_invl'::"('a::linorder) llrb \<Rightarrow>'a llrb \<Rightarrow> 'a \<Rightarrow> 'a llrb \<Rightarrow> 'a llrb "
-  where "pre_invl' l' l a r = ( if l \<noteq> Leaf \<and> color l = Black
+definition pre_invl_llrb::"('a::linorder) llrb \<Rightarrow>'a llrb \<Rightarrow> 'a \<Rightarrow> 'a llrb \<Rightarrow> 'a llrb "
+  where "pre_invl_llrb l' l a r = ( if l \<noteq> Leaf \<and> color l = Black
                                 then baldL l' a r else rightredR l' a r)"
 
-definition pre_invr'::"('a ::linorder) llrb \<Rightarrow>'a \<Rightarrow> 'a llrb \<Rightarrow>'a llrb \<Rightarrow> 'a llrb "
-  where "pre_invr' l a r r' = ( if r \<noteq> Leaf \<and> color r = Black
+definition pre_invr_llrb::"('a ::linorder) llrb \<Rightarrow>'a \<Rightarrow> 'a llrb \<Rightarrow>'a llrb \<Rightarrow> 'a llrb "
+  where "pre_invr_llrb l a r r' = ( if r \<noteq> Leaf \<and> color r = Black
                                 then baldR l a r' else R l a r')"
 
-definition pre_invsplit'::" 'a llrb \<Rightarrow>'a \<Rightarrow> 'a llrb \<Rightarrow> 'a llrb"
-  where "pre_invsplit' l a r = (if r = Leaf then l else (let (a', r') = split_min r in
+definition pre_invsplit_llrb::" 'a llrb \<Rightarrow>'a \<Rightarrow> 'a llrb \<Rightarrow> 'a llrb"
+  where "pre_invsplit_llrb l a r = (if r = Leaf then l else (let (a', r') = split_min r in
                                 if color r = Black then baldR l a' r' else rightredR l a' r'))"
 
-interpretation llrb_op pre_invl' pre_invr' pre_invsplit'
+interpretation llrb_op pre_invl_llrb pre_invr_llrb pre_invsplit_llrb
 done
 
 term "del'" 
@@ -97,7 +97,7 @@ lemma locdel_eq_del:"del' x t = del x t"
   apply simp
   apply(case_tac "x2")
   apply (simp only: del'.simps del.simps)
-  by (simp add: pre_invl'_def pre_invr'_def pre_invsplit'_def)
+  by (simp add: pre_invl_llrb_def pre_invr_llrb_def pre_invsplit_llrb_def)
 end
 
 locale llrb_insert
